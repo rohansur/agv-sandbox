@@ -1,9 +1,3 @@
-#include <iostream>
-#include <math.h>
-#include <stdlib.h>
-#include <new>
-#include <stdio.h>
-#include <highgui.h>
 #include <math.h>
 #include <cv.h>
 #include <cxcore.h> 
@@ -24,8 +18,8 @@ class Image{
 	int **A;
 	public:
 	int count;
-	Image CreateImage(IplImage *img);
-	void color_to_binary(IplImage *bin,IplImage *img);
+	Image(IplImage *img);
+	IplImage* color_to_binary(IplImage *img);
 	void BlobDetect(IplImage *bin,int *count);
 	void definearray(int count);
 	void find_prop(IplImage *bin);

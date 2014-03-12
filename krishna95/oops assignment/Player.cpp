@@ -19,6 +19,8 @@ void Player::Reqcolor(int outcome){
 
 point Player::RequiredPos(point pos,int outcome){
 int min=1000;
+point pos2;
+pos2.x=pos2.y=0;
 Player::Reqcolor(outcome);
 for (int i=0;i<count;i++)
 {
@@ -26,15 +28,11 @@ for (int i=0;i<count;i++)
 	{
 		if (sqrt((blob[i].x-pos.x)*(blob[i].x-pos.x)+(blob[i].y-pos.y)*(blob[i].y-pos.y))<min)
 		{
-			point pos2;
 			pos2.x=blob[i].x;
 			pos2.y=blob[i].y;
 		}	
 	}
 }
-if (min==1000)
-	return NULL;
-else
 	return pos2;
 }
 			

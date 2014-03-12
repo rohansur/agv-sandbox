@@ -5,6 +5,12 @@
 
 using namespace std;
 
+ struct point {
+	int x;
+	int y;
+};
+
+
 class Player {
 private:
 	int score;
@@ -18,4 +24,4 @@ private:
 	int updatescore(int outcome,int score);
 	void update(point pos,int outcome,int score);
 	int  play();
-}
+};

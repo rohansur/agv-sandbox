@@ -3,22 +3,24 @@
 #include "Game.h"
 int main(){
 	Game game;
-	game.img=cvLoadImage("board.jpg",1);
-	Image board=Image::CreateImage(game.img);
+	game.img=cvLoadImage("board.odg",1);
+	
+	Image board(game.img);
 	cout<<"enter the number of players"<<endl;
 	cin>>game.num_players;
-	game.setting(game.plyers)
+	game.setting(game.players);
 	while (1)
 	{
 		for (int i=0;i<game.num_players;i++){
-			game.callplayer(i);
-			if (player[i].pos==NULL)
+			game.players[i].play();
+			if (game.players[i].pos.x==0 && game.players[i].pos.y==0)
 			{
-				winner=&player[i];
+				game.winner=&game.players[i];
 				return 0;
 			}
 		}
 	}
+}
 }
 
 

@@ -44,7 +44,7 @@ int qempty(){
 	if(front==NULL)return 1;
 	return 0;}
 
-void Image::color_to_binary(IplImage *bin,IplImage *img)
+IplImage* Image::color_to_binary(IplImage *img)
 {
 	IplImage *bin=cvCreateImage(cvGetSize(img),IPL_DEPTH_8U,1);
 		for (int i=0;i<img->height;i++ ){
@@ -55,22 +55,47 @@ void Image::color_to_binary(IplImage *bin,IplImage *img)
 					IMGDATA(bin,i,j,0)=0;
 			}
 		}
+		return bin;
 }
 
-Image Image::CreateImage(IplImage *img){
-	img=img;
-	Image::color_to_binary(bin,img);
-	BlobDetect(bin,&count);
-}
+void Image::find_prop(IplImage *bin){
+		int c_x,c_y,c_pixel,i,j,k;
+		for (k=1;k<=count;k++)
+		{
+			for ( i=0;i<bin->height;i++)
+			{
+				for ( j=0;j<img->width;j++){
+					if (A[i][j]==k)
+					{
+						c_x+=j;
+						c_y+=i;
+						c_pixel++;
+					}
+				}
+			}
+		}
+		blob[k].x=c_x/c_pixel;
+		blob[k].y=c_y/c_pixel;
+		c_x=c_y=c_pixel=0;
+		if (IMGDATA(img,i,j,0)==0)
+			blob[k].color='r';
+		if (IMGDATA(img,i,j,0)==180)
+			blob[k].color='b';
+		if (IMGDATA(img,i,j,0)==240)
+			blob[k].color='g';
+	}
 
 
+void Image::definearray(int count){
+		blob=new prop[count+1];
+	}
 
 void Image::BlobDetect(IplImage *bin,int *count)
 {
 	int i,j,x,y,wd=bin->width,ht=bin->height;
-	 	A=new int*[height];
+	 	A=new int*[bin->height];
 	 	for(i=0;i<ht;i++)
-			 A[i]=new int[width];
+			 A[i]=new int[bin->width];
 	 	for(i=0;i<ht;i++){
 			 for(j=0;j<wd;j++){
 			
@@ -101,44 +126,23 @@ void Image::BlobDetect(IplImage *bin,int *count)
 			 }
 		 }
 	}
-	Image::definearray(count);	
+	Image::definearray(*count);	
 	Image::find_prop(bin);
 }
 
-
-
-void Image::definearray(int count){
-		blob=new prop[count+1];
-	}
-
-
-void Image::find_prop(IplImage *bin){
-		int c_x,c_y,c_pixel;
-		for (int k=1;k<=count;k++)
-		{
-			for (int i=0;i<bin->height;i++)
-			{
-				for (j=0;j<img->width;j++){
-					if (A[i][j]==k)
-					{
-						c_x+=j;
-						c_y+=i;
-						c_pixel++;
-					}
-				}
-			}
-		}
-		blob[k].x=c_x/c_pixel;
-		blob[k].y=c_y/c_pixel;
-		c_x=c_y=c_pixel=0;
-		if (IMGDATA(img,i,j,0)==0)
-			blob[k].color='r';
-		if (IMGDATA(img,i,j,0)==180)
-			blob[k].color='b';
-		if (IMGDATA(img,i,j,0)==240)
-			blob[k].color='g';
-	}
+ Image::Image(IplImage *img){
+	img=img;
+	img=Image::color_to_binary(img);
+	BlobDetect(img,&count);
 }
+
+
+
+
+
+
+
+
 
 
 

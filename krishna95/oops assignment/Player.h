@@ -31,4 +31,8 @@ private:
 	void  play(prop *blob);
 };
 
+<<<<<<< HEAD
 #endif 
+=======
+#endif 
+>>>>>>> 06d2ba277a670859eec28c9fc13fb8ed2bd719a5

@@ -149,6 +149,12 @@ void Image::BlobDetect(cv::Mat bin,int *count,cv::Mat img1)
 	cv::waitKey(0);
 	BlobDetect(bin,&count,img);
 }
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 06d2ba277a670859eec28c9fc13fb8ed2bd719a5
 
 
 

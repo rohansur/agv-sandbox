@@ -21,4 +21,7 @@ void Game::numofplayers(int x){
 			setplayer(&players[i],i,image);
 		cout<<"initialising done"<<endl;
 	}
+<<<<<<< HEAD
 	
+=======
+>>>>>>> 06d2ba277a670859eec28c9fc13fb8ed2bd719a5

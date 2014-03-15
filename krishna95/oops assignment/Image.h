@@ -1,4 +1,12 @@
-#include <math.h>
+#ifndef IMAGE_H
+#define IMAGE_H
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+#include <new>
+#include <cstdio>
+#include <highgui.h>
+#include <cmath>
 #include <cv.h>
 #include <cxcore.h> 
 
@@ -9,19 +17,20 @@ struct prop{
 };
 
 
-#define IMGDATA(image,i,j,k) *((uchar*)&image->imageData[(i)*(image->widthStep) + (j)*(image->nChannels)+k])
 
 class Image{
 	private:
-		IplImage *img;
-	prop *blob;
+	cv::Mat img;
 	int **A;
 	public:
+	prop *blob;
 	int count;
-	Image(IplImage *img);
-	IplImage* color_to_binary(IplImage *img);
-	void BlobDetect(IplImage *bin,int *count);
+	Image(cv::Mat img3);
+	cv::Mat color_to_binary(cv::Mat img1);
+	void BlobDetect(cv::Mat bin,int *count,cv::Mat img1);
 	void definearray(int count);
-	void find_prop(IplImage *bin);
+	void find_prop(cv::Mat bin,cv::Mat img1);
 
 };
+
+#endif

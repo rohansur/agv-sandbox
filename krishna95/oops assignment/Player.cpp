@@ -10,39 +10,37 @@ void Player::Reqcolor(int outcome){
 		if (outcome==1)
 		reqcolor='b';
 		else
-			reqcolor='g';void Image::definearray(int count){
-		blob=new prop[count+1];
+			reqcolor='g';
+		cout<<"required colour is "<<reqcolor<<endl;
 	}
 
-	}
 
-
-point Player::RequiredPos(point pos,int outcome){
+point Player::RequiredPos(point pos,int outcome,prop *blob){
 int min=1000;
+point pos2;
+pos2.x=pos2.y=0;
 Player::Reqcolor(outcome);
-for (int i=0;i<count;i++)
+for (int i=0;i<_count;i++)
 {
 	if (blob[i].color==reqcolor && blob[i].x>pos.x && blob[i].y>pos.y)
 	{
 		if (sqrt((blob[i].x-pos.x)*(blob[i].x-pos.x)+(blob[i].y-pos.y)*(blob[i].y-pos.y))<min)
 		{
-			point pos2;
 			pos2.x=blob[i].x;
 			pos2.y=blob[i].y;
 		}	
 	}
 }
-if (min==1000)
-	return NULL;
-else
+	cout<<"pos 2 is "<<pos2.x<<" "<<pos2.y<<endl;
 	return pos2;
 }
 			
 
 
 
-point Player::updatepos(point pos,int outcome){
-	pos=RequiredPos(pos,outcome);
+point Player::updatepos(point pos,int outcome,prop *blob){
+	pos=RequiredPos(pos,outcome,blob);
+	return pos;
 }
 
 int Player::updatescore(int outcome,int score){
@@ -54,14 +52,18 @@ int Player::updatescore(int outcome,int score){
 		return score+outcome;
 }
 
-void Player::update(point pos,int outcome,int score){
-	pos=updatepos(pos,outcome);
+void Player::update(int outcome,prop *blob){
+	cout<<"updating "<<endl;
+	pos=updatepos(pos,outcome,blob);
+	cout<<"initial score is "<<score<<endl;
 	score=updatescore(outcome,score);
+	cout<<"score is "<<score<<endl;
 }
 
-int Player::play(){
+void Player::play(prop *blob){
 	outcome= rand()%6;
-	update(pos,outcome,score);
+	cout<<"outcome is "<<outcome<<endl;
+	update(outcome,blob);
 }
 
 

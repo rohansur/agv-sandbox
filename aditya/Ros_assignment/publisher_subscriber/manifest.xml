@@ -1,0 +1,16 @@
+<package>
+  <description brief="publisher_subscriber">
+
+     publisher_subscriber
+
+  </description>
+  <author>aditya</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/publisher_subscriber</url>
+  <depend package="roscpp"/>
+  <depend package="rospy"/>
+
+</package>
+
+

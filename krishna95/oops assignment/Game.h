@@ -1,3 +1,5 @@
+#ifndef GAME_H
+#define GAME_H
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>
@@ -7,6 +9,8 @@
 #include <math.h>
 #include <cv.h>
 #include <cxcore.h> 
+#include "Player.h"
+#include "Image.h"
 
 
 //g++ game.cpp 'pkg-config opencv --cflags --libs'
@@ -17,10 +21,12 @@ class Game{
 	int dice;
 	public:
 	Player *winner;
-	IplImage *img;
+	cv::Mat img;
 	Player *players;
 	int num_players;
 	void numofplayers(int x);
-	void  setplayer( Player player,int Id);
-	void setting(Player* players);
+	void  setplayer( Player* player,int Id,Image image);
+	void setting(Image image);
 };
+
+#endif

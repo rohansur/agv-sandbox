@@ -1,7 +1,10 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include <iostream>
 #include <math.h>
 #include <stdlib.h>
 #include <new>
+#include "Image.h"
 
 using namespace std;
 
@@ -13,15 +16,19 @@ using namespace std;
 
 class Player {
 private:
-	int score;
 	int outcome;
 	char reqcolor;
 	public:
-	int id;
+	int score;
+	int id,_count;
 	point pos;
+
 	void Reqcolor(int outcome);
-	point updatepos(point pos,int outcome);
+	point RequiredPos(point pos,int outcome,prop *blob);
+	point updatepos(point pos,int outcome,prop *blob);
 	int updatescore(int outcome,int score);
-	void update(point pos,int outcome,int score);
-	int  play();
+	void update(int outcome,prop *blob);
+	void  play(prop *blob);
 };
+
+#endif 
